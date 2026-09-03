@@ -1,0 +1,83 @@
+spring:
+  config:
+    import: "optional:file:.env[.properties]"
+  profiles:
+    active: ${APP_ENV:dev}
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/car_rental_db}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+
+  flyway:
+    enabled: true
+    url: ${DB_URL:jdbc:mysql://localhost:3306/car_rental_db}
+    user: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    locations: classpath:db/migration
+
+  cache:
+    type: caffeine
+    caffeine:
+      spec: initialCapacity=10,maximumSize=200,expireAfterWrite=30m
+
+  jooq:
+    sql-dialect: MYSQL
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+
+jwt:
+  secret: ${JWT_SECRET:this_is_a_very_secure_default_secret_key_for_local_development_only!}
+  expiration: ${JWT_EXPIRATION:86400000} # 24 hours
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
+
+telegram:
+  bot-token: ${TELEGRAM_BOT_TOKEN:default_bot_token}
+  chat-id: ${TELEGRAM_CHAT_ID:default_chat_id}
+  enabled: ${TELEGRAM_ENABLED:false}
+
+aba:
+  api-url: ${ABA_API_URL:https://checkout-sandbox.payway.com.kh/api/payment-gateway/v1/payments/purchase}
+  merchant-id: ${ABA_MERCHANT_ID:ecash}
+  api-key: ${ABA_API_KEY:default_api_key}
+
+partner:
+  datasource:
+    url: ${PARTNER_DB_URL:jdbc:mysql://localhost:3306/partner_db}
+    username: ${PARTNER_DB_USERNAME:root}
+    password: ${PARTNER_DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
