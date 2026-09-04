@@ -252,6 +252,14 @@
 									<includeTypes>(?i:int.*)</includeTypes>
 									<includeExpression>(?i:.*_id|created_by|modified_by|id)</includeExpression>
 								</forcedType>
+								<forcedType>
+									<name>INTEGER</name>
+									<includeExpression>.*\.is_active$</includeExpression>
+								</forcedType>
+								<forcedType>
+									<name>INTEGER</name>
+									<includeExpression>.*\.status$</includeExpression>
+								</forcedType>
 							</forcedTypes>
 						</database>
 						<generate>

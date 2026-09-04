@@ -25,7 +25,7 @@ import static com.Car_Rental_API.common.util.QueryUtil.auditFields;
 import static com.Car_Rental_API.common.util.QueryUtil.touchModified;
 import java.util.*;
 
-import com.Car_Rental_API.module.mobile.dto.MobileVehicleFilterRequest;
+import com.Car_Rental_API.module.mobile.dto.request.MobileVehicleFilterRequest;
 import java.math.BigDecimal;
 
 import static com.db_access.jooq.tables.CustomerReviews.CUSTOMER_REVIEWS;

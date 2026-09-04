@@ -104,8 +104,8 @@ public class CustomerSupportRepository {
                 .execute();
     }
 
-    public void deleteById(Long id) {
-        dsl.update(CUSTOMER_SUPPORT)
+    public int deleteById(Long id) {
+        return dsl.update(CUSTOMER_SUPPORT)
                 .set(CUSTOMER_SUPPORT.IS_ACTIVE, (byte) 0)
                 .set(CUSTOMER_SUPPORT.MODIFIED, LocalDateTime.now())
                 .where(CUSTOMER_SUPPORT.ID.eq(id))

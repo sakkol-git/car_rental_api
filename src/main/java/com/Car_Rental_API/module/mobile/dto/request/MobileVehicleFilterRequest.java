@@ -1,4 +1,4 @@
-package com.Car_Rental_API.module.mobile.dto;
+package com.Car_Rental_API.module.mobile.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.Car_Rental_API.module.master_data.vechicle.dto.VehicleFilterRequest;

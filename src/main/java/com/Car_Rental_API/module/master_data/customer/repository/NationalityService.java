@@ -1,4 +1,4 @@
-package com.Car_Rental_API.module.master_data.nationality.service;
+package com.Car_Rental_API.module.master_data.customer.repository;
 
 import com.Car_Rental_API.module.master_data.nationality.repository.*;
 import com.Car_Rental_API.module.master_data.nationality.mapper.*;
